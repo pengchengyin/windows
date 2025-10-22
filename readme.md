@@ -385,6 +385,10 @@ kubectl apply -f https://raw.githubusercontent.com/dockur/windows/refs/heads/mas
 
   Yes, this project contains only open-source code and does not distribute any copyrighted material. Any product keys found in the code are just generic placeholders provided by Microsoft for trial purposes. So under all applicable laws, this project will be considered legal.
 
+###  如何制作可直接启动的镜像
+参考[制作可直接启动的镜像](%E5%88%B6%E4%BD%9C%E5%8F%AF%E7%9B%B4%E6%8E%A5%E5%90%AF%E5%8A%A8%E7%9A%84windows%E9%95%9C%E5%83%8F.md#3-基于基础操作系统文件制作可直接启动的镜像)
+
+
 ## Disclaimer ⚖️
 
 *The product names, logos, brands, and other trademarks referred to within this project are the property of their respective trademark holders. This project is not affiliated, sponsored, or endorsed by Microsoft Corporation.*
