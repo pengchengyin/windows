@@ -101,3 +101,52 @@
   ```
   docker compose up -d
   ```
+
+#### 5. 安装openssh-server
+  (1) 安装openssh-server
+  在windows系统中安装openssh-server，参考https://github.com/PowerShell/Win32-OpenSSH
+  安装完成后：
+  - 在服务列表中检查sshd服务是否正常运行
+  - 配置系统环境变量
+  - 在cmd中使用ssh命令测试是否正常
+    例如：
+    ```
+    ssh -p 22 Docker@127.0.0.1
+    ```
+  - 直接关闭windows防火墙（不用重新打镜像），或者在define.sh中增加以下内容，允许ssh连接（需要重新安装windows才能生效）：
+  ```
+  echo "\"22:TCP\"=\"22:TCP:*:Enabled:SSH Service\""
+  ```
+  (2) commit镜像
+  执行docker commit命令提交镜像，例如：
+  ```
+  docker commit win7 win7:base-20251022-ssh
+  ```
+  其中win7是容器名称，win7:base-20251022-ssh是新镜像名称。
+
+  (3) 启动新镜像
+  使用docker compose命令启动新镜像，docker-compose.yml文件内容例如：
+  ```
+  services:
+  windows:
+    image: win7:base-20251022-ssh
+    privileged: true
+    container_name: win7-ssh
+    environment:
+      VERSION: "7"
+      RAM_SIZE: "4G"
+      CPU_CORES: "2"
+      DISK_SIZE: "10G"
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8006:8006
+      - 3389:3389
+      - 22:22
+    restart: always
+    stop_grace_period: 2m
+
+  ```
